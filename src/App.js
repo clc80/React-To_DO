@@ -10,7 +10,8 @@ class App extends Component {
         { description: 'Walk the cat', isCompleted: true },
         { description: 'Throw the dishes away', isCompleted: false },
         { description: 'Buy new dishes', isCompleted: false }
-      ]
+      ],
+      newTodoDescription: ''
     };
   }
 
@@ -19,6 +20,15 @@ class App extends Component {
     const todo = todos[index];
     todo.isCompleted = todo.isCompleted ? false : true;
     this.setState({ todos: todos })
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    if(!this.state.newTodoDescription) { return }
+    const newTodo = { description: this.state.newTodoDescription, isCompleted: false };
+    this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
+  }
+  handleChange(e) {
+    this.setState({ newTodoDescription: e.target.value })
   }
 
   render() {
@@ -34,6 +44,15 @@ class App extends Component {
             />
           )}
         </ul>
+        {/*form for adding todos*/}
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <input
+            type="text"
+            value={ this.state.newTodoDescription }
+            onChange={ (e) => this.handleChange(e) }
+          />
+          <input type="submit" />
+        </form>
       </div>
     );
   }
