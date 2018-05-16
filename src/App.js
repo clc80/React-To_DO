@@ -28,7 +28,11 @@ class App extends Component {
     this.setState({ todos: [...this.state.todos, newTodo], newTodoDescription: '' });
   }
   handleChange(e) {
-    this.setState({ newTodoDescription: e.target.value })
+    this.setState({ newTodoDescription: e.target.value });
+  }
+  deleteTodo(index) {
+    const todo = this.state.todos.filter((todo, i) => i !== index);
+    this.setState({ todos: todo })
   }
 
   render() {
@@ -41,6 +45,7 @@ class App extends Component {
               description={ todo.description }
               isCompleted={ todo.isCompleted }
               toggleComplete={ () => this.toggleComplete(index) }
+              deleteTodo={ () => this.deleteTodo(index) }
             />
           )}
         </ul>

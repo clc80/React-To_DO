@@ -9,6 +9,9 @@ class ToDo extends Component {
           onChange={ this.props.toggleComplete }
         />
         <span>{ this.props.description }</span>
+        <button onClick={this.props.deleteTodo }
+          >Delete
+        </button>
       </li>
     )
   }
